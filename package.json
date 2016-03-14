@@ -1,0 +1,20 @@
+{
+  "name": "gitweet2",
+  "version": "1.0.0",
+  "description": "Github notification monitor. Lite.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tborychowski/gitweet2.git"
+  },
+  "scripts": {
+    "start": "electron --enable-transparent-visuals --disable-gpu index.js"
+  },
+  "author": "Tom <tborychowski@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.1"
+  }
+}

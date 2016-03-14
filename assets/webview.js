@@ -5,6 +5,7 @@ const ipc = require('electron').ipcRenderer;
 function reload () {
 	setTimeout(() => {
 		document.querySelector('.filter-list .filter-item.selected').click();
+		setTimeout(setCounter, 300);
 	}, 500);
 }
 
@@ -29,6 +30,9 @@ function updateCss () {
 			.main-content { padding: 0 10px; }
 			.one-fourth { display: none; }
 			.three-fourths { width: 100%; }
+		}
+		@media (max-width: 550px) {
+			.notification-actions>li.tooltipped { display: none; }
 		}
 	`;
 	document.head.appendChild(style);

@@ -25,6 +25,7 @@ webview.addEventListener('ipc-message', function (ev) {
 function refresh () {
 	if (refreshTimer) clearTimeout(refreshTimer);
 	refreshTimer = setTimeout(refresh, refreshTimeout);
+	// console.log('refreshed');
 }
 
 function counter (co) {

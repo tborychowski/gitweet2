@@ -13,7 +13,11 @@ const html = `<webview id="webview" src="${ghUrl}" preload="${wvUrl}" partition=
 document.getElementById('app').innerHTML = html;
 
 const webview = document.getElementById('webview');
-// webview.addEventListener('dom-ready', function() {});
+webview.style.opacity = 0;
+webview.addEventListener('dom-ready', function() {
+	webview.style.transition = 'opacity .5s ease-out';
+	webview.style.opacity = 1;
+});
 
 
 webview.addEventListener('ipc-message', function (ev) {

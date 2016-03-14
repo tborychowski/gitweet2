@@ -5,7 +5,8 @@ const ipc = require('electron').ipcRenderer;
 function reload () {
 	setTimeout(() => {
 		document.querySelector('.filter-list .filter-item.selected').click();
-		setTimeout(setCounter, 300);
+		setTimeout(setCounter, 500);
+		setTimeout(setCounter, 1500);
 	}, 500);
 }
 

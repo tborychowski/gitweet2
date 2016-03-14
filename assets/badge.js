@@ -7,10 +7,9 @@ const win = remote.getCurrentWindow();
 const appName = 'Gitweet';
 
 module.exports = function (text) {
-	text = String(text || '');
+	text = (text === '0' ? '' : String(text || ''));
 
 	win.setTitle(appName + (text ? ` (${text})` : ''));
-
 
 	if (process.platform === 'darwin') {
 		app.dock.setBadge(text);

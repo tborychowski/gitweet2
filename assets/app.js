@@ -4,7 +4,7 @@ const shell = require('electron').shell;
 const badge = require('./assets/badge');
 const config = require('./config.json');
 
-const refreshTimeout = config.refreshEvery || 20;	// in sec.
+const refreshTimeout = (config.refreshEvery || 20) * 1000;	// in sec.
 let refreshTimer = null;
 const ghUrl = config.url.replace(/\/$/, '') + '/notifications/participating';
 const wvUrl = `file://${__dirname}\\assets\\webview.js`;

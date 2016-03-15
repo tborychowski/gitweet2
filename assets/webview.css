@@ -10,6 +10,7 @@
 .tabnav { display: none; }
 
 
+/* name, age, checkbox and avatars */
 @media (max-width: 850px) {
 	.main-content { padding: 0 10px; }
 	.one-fourth { display: none; }
@@ -18,17 +19,20 @@
 	.notification-actions>li.age { width: 100px; }
 }
 
+/* name, age and checkbox */
 @media (max-width: 550px) {
-	.notifications .list-group-item-name { margin-right: 120px; }
-	.notification-actions>li.age { width: 80px; }
+	.notifications .list-group-item-name { margin-right: 130px; }
+	.notification-actions>li.age { width: 90px; }
 	.notification-actions>li.tooltipped { display: none; }
 }
 
+/* name and checkbox */
 @media (max-width: 450px) {
 	.notifications .list-group-item-name { margin-right: 25px; }
 	.notification-actions>li.age { display: none; }
 }
 
+/* just name */
 @media (max-width: 350px) {
 	.notification-actions { display: none; }
 	.notifications .list-group-item-name { margin-right: 0; }

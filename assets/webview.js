@@ -1,6 +1,8 @@
 'use strict';
 
-const ipc = require('electron').ipcRenderer;
+const msg = require('electron').ipcRenderer.sendToHost;
+const readFile = require('fs').readFileSync;
+const cssFile = './assets/webview.css';
 
 function reload () {
 	setTimeout(() => {
@@ -13,39 +15,24 @@ function reload () {
 function setCounter () {
 	const sel = '.filter-list a[href="/notifications/participating"] .count';
 	const co = document.querySelector(sel).innerHTML;
-	ipc.sendToHost('counter', co);
+	msg('counter', co);
 }
 
 function updateCss () {
+	let css;
+	try { css = readFile(cssFile, 'utf8'); } catch (e) { css = ''; }
+
 	const style = document.createElement('style');
-	style.innerHTML = `
-		.container { width: auto; }
-		.main-content { padding: 0 20px 0 10px; }
-		.header,
-		.site-footer,
-		.flash-full.js-notice,
-		.tabnav,
-		.notification-actions .mute
-			{ display: none; }
-		@media (max-width: 850px) {
-			.main-content { padding: 0 10px; }
-			.one-fourth { display: none; }
-			.three-fourths { width: 100%; }
-		}
-		@media (max-width: 550px) {
-			.notification-actions>li.tooltipped { display: none; }
-		}
-	`;
+	style.innerHTML = css;
 	document.head.appendChild(style);
 	document.querySelector('.accessibility-aid').remove();
 }
-
 
 function onClick (e) {
 	const el = e.target, sel = '.notifications-list .js-navigation-open';
 
 	if (el.matches(sel)) {
-		ipc.sendToHost('goto', el.href);
+		msg('goto', el.href);
 		reload();
 		e.preventDefault();
 	}
@@ -54,12 +41,10 @@ function onClick (e) {
 	}
 }
 
-
 function init () {
 	setCounter();
 	updateCss();
 }
-
 
 document.addEventListener('click', onClick, true);
 document.addEventListener('DOMContentLoaded', init);

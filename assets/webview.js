@@ -1,6 +1,7 @@
 'use strict';
 
-const msg = require('electron').ipcRenderer.sendToHost;
+const ipc = require('electron').ipcRenderer;
+const msg = ipc.sendToHost;
 const readFile = require('fs').readFileSync;
 const cssFile = './assets/webview.css';
 
@@ -32,19 +33,19 @@ function onClick (e) {
 	const el = e.target, sel = '.notifications-list .js-navigation-open';
 
 	if (el.matches(sel)) {
+		e.preventDefault();
 		msg('goto', el.href);
 		reload();
-		e.preventDefault();
 	}
-	else if (el.matches('.delete *')) {
-		reload();
-	}
+	else if (el.matches('.delete *')) reload();
 }
 
 function init () {
 	setCounter();
 	updateCss();
+	ipc.on('reload', reload);
+	document.addEventListener('click', onClick, true);
 }
 
-document.addEventListener('click', onClick, true);
+
 document.addEventListener('DOMContentLoaded', init);

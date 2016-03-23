@@ -4,13 +4,16 @@ const ipc = require('electron').ipcRenderer;
 const msg = ipc.sendToHost;
 const readFile = require('fs').readFileSync;
 const cssFile = './assets/webview.css';
+let timer;
 
-function reload () {
-	setTimeout(() => {
+function reload (delay) {
+	if (timer) clearTimeout(timer);
+	delay = (typeof delay === 'number' ? delay : 500);
+	timer = setTimeout(() => {
 		document.querySelector('.filter-list .filter-item.selected').click();
 		setTimeout(setCounter, 500);
 		setTimeout(setCounter, 1500);
-	}, 500);
+	}, delay);
 }
 
 function setCounter () {
@@ -35,9 +38,9 @@ function onClick (e) {
 	if (el.matches(sel)) {
 		e.preventDefault();
 		msg('goto', el.href);
-		reload();
+		reload(2000);
 	}
-	else if (el.matches('.delete *')) reload();
+	else if (el.matches('.delete *')) reload(2000);
 }
 
 function init () {

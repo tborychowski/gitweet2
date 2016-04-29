@@ -1,14 +1,16 @@
 'use strict';
 
+const config = require('../config.json');
 const ipc = require('electron').ipcRenderer;
 const msg = ipc.sendToHost;
 const readFile = require('fs').readFileSync;
 const cssFile = './assets/webview.css';
-let timer;
+let timer, offset;
 
 function reload (delay) {
-	if (timer) clearTimeout(timer);
 	delay = (typeof delay === 'number' ? delay : 500);
+	if (timer) clearTimeout(timer);
+	offset = document.body.scrollTop;
 	timer = setTimeout(() => {
 		document.querySelector('.filter-list .filter-item.selected').click();
 		setTimeout(setCounter, 500);
@@ -16,9 +18,17 @@ function reload (delay) {
 	}, delay);
 }
 
+function updateScrollOffset () {
+	if (typeof offset === 'number') {
+		document.body.scrollTop = offset;
+		if (document.body.scrollTop > 0) offset = null;
+	}
+}
+
 function setCounter () {
-	const sel = '.filter-list a[href="/notifications/participating"] .count';
-	const co = document.querySelector(sel).innerHTML;
+	updateScrollOffset();
+	const href = '/notifications' + (config.participating ? '/participating' : '');
+	const co = document.querySelector(`.filter-list a[href="${href}"] .count`).innerHTML;
 	msg('counter', co);
 }
 
@@ -33,14 +43,16 @@ function updateCss () {
 }
 
 function onClick (e) {
-	const el = e.target, sel = '.notifications-list .js-navigation-open';
+	const el = e.target;
 
-	if (el.matches(sel)) {
+	if (el.matches('.notifications-list .js-navigation-open')) {
 		e.preventDefault();
 		msg('goto', el.href);
 		reload(2000);
 	}
-	else if (el.matches('.delete *')) reload(2000);
+	else if (el.matches('.delete *')) {
+		reload(2000);
+	}
 }
 
 function init () {

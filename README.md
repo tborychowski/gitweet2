@@ -14,7 +14,8 @@ Just create a `config.json` file in the root, as below:
 ```js
 {
 	"url": "https://github.mycompany.local/",
-	"refreshEvery": 10          // seconds
+	"refreshEvery": 10,          // seconds
+	"participating": true
 }
 ```
 

@@ -7,8 +7,8 @@ const config = require('./config.json');
 const refreshTimeout = (config.refreshEvery || 20) * 1000;	// in sec.
 let refreshTimer = null;
 
-const ghUrl = config.url.replace(/\/$/, '') + '/notifications/participating';
 const wvUrl = `file://${__dirname}\\assets\\webview.js`;
+const ghUrl = config.url.replace(/\/$/, '') + '/notifications' + (config.participating ? '/participating' : '');
 const html = `<webview id="webview" src="${ghUrl}" preload="${wvUrl}" partition="persist:github"></webview>`;
 
 document.getElementById('app').innerHTML = html;

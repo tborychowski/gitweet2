@@ -1,8 +1,9 @@
 'use strict';
 
-const remote = require('remote');
-const app = remote.require('app');
-const nativeImage = remote.require('native-image');
+const electron = require('electron');
+const remote = electron.remote;
+const app = remote.app;
+const nativeImage = electron.nativeImage;
 const win = remote.getCurrentWindow();
 const appName = 'Gitweet';
 

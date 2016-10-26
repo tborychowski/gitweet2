@@ -8,7 +8,8 @@
     "url": "https://github.com/tborychowski/gitweet2.git"
   },
   "scripts": {
-    "start": "electron --enable-transparent-visuals --disable-gpu index.js"
+    "start": "electron --enable-transparent-visuals --disable-gpu index.js",
+    "package": "electron-packager . --platform=darwin"
   },
   "author": "Tom <tborychowski@gmail.com>",
   "license": "MIT",

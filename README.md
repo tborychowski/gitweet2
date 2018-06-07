@@ -18,6 +18,3 @@ Just create a `config.json` file in the root, as below:
 	"participating": true
 }
 ```
-
-### License
-*MIT*
